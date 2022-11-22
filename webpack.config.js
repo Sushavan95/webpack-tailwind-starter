@@ -14,7 +14,7 @@ module.exports = {
     clean: true,
   },
 
-  // CSS LOADING
+  // CSS, JS AND FILE LOADING
   module: {
     rules: [
       {
@@ -25,15 +25,16 @@ module.exports = {
           },
         ],
       },
-      // {
-      //     test: /\.js$/i,
-      //     use: {
-      //       loader: 'babel-loader',
-      //       options: {
-      //         presets: ['@babel/preset-env'],
-      //       },
-      //     },
-      // },
+      {
+          test: /\.js$/i,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+            },
+          },
+      },
       {
         // Extract any CSS or SCSS content and minimize
         test: /\.[s]?css$/,
@@ -43,21 +44,15 @@ module.exports = {
   },
 
   plugins: [
+    // ADDING HTML PAGES FOR INJECTING BUNDLE JS FILE AND GENERATING INTO DIST FILE
     new HtmlWebpackPlugin({ inject: 'body', template: path.resolve(process.cwd(), 'src/index.html') }),
 
-    // Extracts CSS into separate files
+    // EXTRACTS CSS INTO SEPARATE CSS FILE
     new MiniCssExtractPlugin({
       filename: './css/style.css',
     }),
 
-    /* setting jquery
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
-  }),
-  */
-
-    // Copy images to the public folder
+    // COPY IMAGES TO PUBLIC FOLDER
     new CopyPlugin({
       patterns: [
         {
