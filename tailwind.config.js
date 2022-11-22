@@ -6,6 +6,10 @@ module.exports = {
       colors: {
         primary: 'blue',
       },
+
+      screens: {
+        '3xl': '1700px',
+      },
     },
 
     screens: {
@@ -29,6 +33,7 @@ module.exports = {
         lg: '3rem',
         xl: '5rem',
         '2xl': '5rem',
+        '3xl': '8.75rem',
       },
     },
   },
